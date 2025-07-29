@@ -1,0 +1,59 @@
+# FastAPI and ASGI
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+python-multipart>=0.0.6
+python-jose[cryptography]>=3.3.0
+passlib[bcrypt]>=1.7.4
+python-dotenv>=1.0.0
+
+# Database
+sqlalchemy>=2.0.0
+alembic>=1.12.0
+redis>=5.0.0
+
+# AI and ML
+openai>=1.3.0
+anthropic>=0.7.0
+
+# Arabic NLP
+arabic-reshaper>=3.0.0
+python-bidi>=0.4.0
+
+# HTTP and API
+httpx>=0.25.0
+requests>=2.31.0
+aiohttp>=3.9.0
+websockets>=12.0
+
+# Validation and Serialization
+pydantic>=2.5.0
+pydantic-settings>=2.1.0
+email-validator>=2.1.0
+
+# Security
+cryptography>=41.0.0
+bcrypt>=4.1.0
+PyJWT>=2.8.0
+
+# Monitoring and Logging
+structlog>=23.2.0
+
+# Testing
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+
+# Development
+black>=23.11.0
+flake8>=6.1.0
+
+# File handling
+Pillow>=10.1.0
+
+# Date and time
+python-dateutil>=2.8.0
+pytz>=2023.3
+
+# Environment and configuration
+click>=8.1.0
+rich>=13.7.0
+typer>=0.9.0 

@@ -1,0 +1,368 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: migration-job
+  labels:
+    app: joulaa-platform
+    component: migration
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-weight": "1"
+    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
+spec:
+  template:
+    metadata:
+      labels:
+        app: migration-job
+        component: migration
+    spec:
+      restartPolicy: OnFailure
+      initContainers:
+      # Wait for database to be ready
+      - name: wait-for-db
+        image: postgres:15-alpine
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: joulaa-platform-config
+              key: DATABASE_URL
+        command:
+        - /bin/bash
+        - -c
+        - |
+          set -e
+          echo "Waiting for database to be ready..."
+          
+          # Extract connection details from DATABASE_URL
+          # Format: postgresql://user:password@host:port/database
+          DB_HOST=$(echo $DATABASE_URL | sed -n 's/.*@\([^:]*\):.*/\1/p')
+          DB_PORT=$(echo $DATABASE_URL | sed -n 's/.*:\([0-9]*\)\/.*/\1/p')
+          DB_USER=$(echo $DATABASE_URL | sed -n 's/.*:\/\/\([^:]*\):.*/\1/p')
+          DB_NAME=$(echo $DATABASE_URL | sed -n 's/.*\/\([^?]*\).*/\1/p')
+          
+          echo "Connecting to: $DB_HOST:$DB_PORT as $DB_USER to database $DB_NAME"
+          
+          until pg_isready -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d "$DB_NAME"; do
+            echo "Database is not ready yet. Waiting..."
+            sleep 5
+          done
+          
+          echo "Database is ready!"
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+      containers:
+      - name: migration
+        image: {{REGISTRY}}/joulaa-platform-backend:{{IMAGE_TAG}}
+        command:
+        - /bin/bash
+        - -c
+        - |
+          set -e
+          echo "Starting database migration..."
+          
+          # Run Alembic migrations
+          echo "Running Alembic migrations..."
+          alembic upgrade head
+          
+          # Create initial data if needed
+          echo "Creating initial data..."
+          python -c "
+          import asyncio
+          from app.core.database import get_db
+          from app.core.init_db import init_db
+          
+          async def main():
+              async for db in get_db():
+                  await init_db(db)
+                  break
+          
+          asyncio.run(main())
+          "
+          
+          echo "Migration completed successfully!"
+        env:
+        - name: ENVIRONMENT
+          value: "production"
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: joulaa-platform-config
+              key: DATABASE_URL
+        - name: REDIS_URL
+          valueFrom:
+            secretKeyRef:
+              name: joulaa-platform-config
+              key: REDIS_URL
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: joulaa-platform-config
+              key: SECRET_KEY
+        - name: PYTHONPATH
+          value: "/app"
+        volumeMounts:
+        - name: migration-logs
+          mountPath: /app/logs
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 1000
+          runAsGroup: 1000
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+      volumes:
+      - name: migration-logs
+        emptyDir:
+          sizeLimit: 100Mi
+      securityContext:
+        fsGroup: 1000
+  backoffLimit: 3
+  activeDeadlineSeconds: 600
+---
+# Database Backup Job (runs daily)
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: database-backup
+  labels:
+    app: joulaa-platform
+    component: backup
+spec:
+  schedule: "0 2 * * *"  # Daily at 2 AM
+  timeZone: "Asia/Riyadh"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: database-backup
+            component: backup
+        spec:
+          restartPolicy: OnFailure
+          containers:
+          - name: backup
+            image: postgres:15-alpine
+            env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: joulaa-platform-config
+                  key: DATABASE_URL
+            - name: MINIO_ENDPOINT
+              value: "minio:9000"
+            - name: MINIO_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: minio-secret
+                  key: MINIO_ROOT_USER
+            - name: MINIO_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: minio-secret
+                  key: MINIO_ROOT_PASSWORD
+            command:
+            - /bin/bash
+            - -c
+            - |
+              set -e
+              
+              # Install MinIO client
+              wget -O /usr/local/bin/mc https://dl.min.io/client/mc/release/linux-amd64/mc
+              chmod +x /usr/local/bin/mc
+              
+              # Configure MinIO client
+              mc alias set minio http://$MINIO_ENDPOINT $MINIO_ACCESS_KEY $MINIO_SECRET_KEY
+              
+              # Extract database connection details
+              DB_HOST=$(echo $DATABASE_URL | sed -n 's/.*@\([^:]*\):.*/\1/p')
+              DB_PORT=$(echo $DATABASE_URL | sed -n 's/.*:\([0-9]*\)\/.*/\1/p')
+              DB_USER=$(echo $DATABASE_URL | sed -n 's/.*:\/\/\([^:]*\):.*/\1/p')
+              DB_PASS=$(echo $DATABASE_URL | sed -n 's/.*:\/\/[^:]*:\([^@]*\)@.*/\1/p')
+              DB_NAME=$(echo $DATABASE_URL | sed -n 's/.*\/\([^?]*\).*/\1/p')
+              
+              # Create backup filename with timestamp
+              BACKUP_FILE="joulaa_backup_$(date +%Y%m%d_%H%M%S).sql"
+              
+              echo "Creating database backup: $BACKUP_FILE"
+              
+              # Create database backup
+              PGPASSWORD="$DB_PASS" pg_dump \
+                -h "$DB_HOST" \
+                -p "$DB_PORT" \
+                -U "$DB_USER" \
+                -d "$DB_NAME" \
+                --verbose \
+                --clean \
+                --no-owner \
+                --no-privileges \
+                --format=custom \
+                > "/tmp/$BACKUP_FILE"
+              
+              # Compress backup
+              gzip "/tmp/$BACKUP_FILE"
+              BACKUP_FILE="$BACKUP_FILE.gz"
+              
+              # Upload to MinIO
+              echo "Uploading backup to MinIO..."
+              mc cp "/tmp/$BACKUP_FILE" "minio/joulaa-backups/database/$BACKUP_FILE"
+              
+              # Clean up old backups (keep last 30 days)
+              echo "Cleaning up old backups..."
+              mc rm --recursive --force --older-than 30d "minio/joulaa-backups/database/"
+              
+              echo "Backup completed successfully: $BACKUP_FILE"
+            resources:
+              requests:
+                memory: "256Mi"
+                cpu: "100m"
+              limits:
+                memory: "512Mi"
+                cpu: "500m"
+            securityContext:
+              runAsNonRoot: true
+              runAsUser: 999
+              runAsGroup: 999
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities:
+                drop:
+                - ALL
+          securityContext:
+            fsGroup: 999
+      backoffLimit: 2
+      activeDeadlineSeconds: 1800
+---
+# Database Restore Job (manual trigger)
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: database-restore
+  labels:
+    app: joulaa-platform
+    component: restore
+  annotations:
+    # This job should be manually triggered, not automatically
+    "manual-trigger": "true"
+spec:
+  template:
+    metadata:
+      labels:
+        app: database-restore
+        component: restore
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: restore
+        image: postgres:15-alpine
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: joulaa-platform-config
+              key: DATABASE_URL
+        - name: MINIO_ENDPOINT
+          value: "minio:9000"
+        - name: MINIO_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: minio-secret
+              key: MINIO_ROOT_USER
+        - name: MINIO_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: minio-secret
+              key: MINIO_ROOT_PASSWORD
+        - name: BACKUP_FILE
+          value: ""  # Set this to the backup file name to restore
+        command:
+        - /bin/bash
+        - -c
+        - |
+          set -e
+          
+          if [ -z "$BACKUP_FILE" ]; then
+            echo "ERROR: BACKUP_FILE environment variable must be set"
+            echo "Usage: Set BACKUP_FILE to the name of the backup file to restore"
+            echo "Example: joulaa_backup_20231201_020000.sql.gz"
+            exit 1
+          fi
+          
+          # Install MinIO client
+          wget -O /usr/local/bin/mc https://dl.min.io/client/mc/release/linux-amd64/mc
+          chmod +x /usr/local/bin/mc
+          
+          # Configure MinIO client
+          mc alias set minio http://$MINIO_ENDPOINT $MINIO_ACCESS_KEY $MINIO_SECRET_KEY
+          
+          # Download backup file
+          echo "Downloading backup file: $BACKUP_FILE"
+          mc cp "minio/joulaa-backups/database/$BACKUP_FILE" "/tmp/$BACKUP_FILE"
+          
+          # Decompress if needed
+          if [[ "$BACKUP_FILE" == *.gz ]]; then
+            gunzip "/tmp/$BACKUP_FILE"
+            BACKUP_FILE=${BACKUP_FILE%.gz}
+          fi
+          
+          # Extract database connection details
+          DB_HOST=$(echo $DATABASE_URL | sed -n 's/.*@\([^:]*\):.*/\1/p')
+          DB_PORT=$(echo $DATABASE_URL | sed -n 's/.*:\([0-9]*\)\/.*/\1/p')
+          DB_USER=$(echo $DATABASE_URL | sed -n 's/.*:\/\/\([^:]*\):.*/\1/p')
+          DB_PASS=$(echo $DATABASE_URL | sed -n 's/.*:\/\/[^:]*:\([^@]*\)@.*/\1/p')
+          DB_NAME=$(echo $DATABASE_URL | sed -n 's/.*\/\([^?]*\).*/\1/p')
+          
+          echo "Restoring database from: $BACKUP_FILE"
+          echo "WARNING: This will overwrite the current database!"
+          
+          # Restore database
+          PGPASSWORD="$DB_PASS" pg_restore \
+            -h "$DB_HOST" \
+            -p "$DB_PORT" \
+            -U "$DB_USER" \
+            -d "$DB_NAME" \
+            --verbose \
+            --clean \
+            --if-exists \
+            --no-owner \
+            --no-privileges \
+            "/tmp/$BACKUP_FILE"
+          
+          echo "Database restore completed successfully!"
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 999
+          runAsGroup: 999
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+      securityContext:
+        fsGroup: 999
+  backoffLimit: 1
+  activeDeadlineSeconds: 1800

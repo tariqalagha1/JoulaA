@@ -1,0 +1,269 @@
+version: '3.8'
+
+services:
+  # =============================================================================
+  # DATABASE SERVICES
+  # =============================================================================
+  postgres:
+    image: postgres:15-alpine
+    container_name: joulaa-postgres
+    environment:
+      POSTGRES_DB: joulaa
+      POSTGRES_USER: joulaa_user
+      POSTGRES_PASSWORD: joulaa_password
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=C"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend/scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    networks:
+      - joulaa-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U joulaa_user -d joulaa"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # =============================================================================
+  # CACHE & MESSAGE BROKER
+  # =============================================================================
+  redis:
+    image: redis:7-alpine
+    container_name: joulaa-redis
+    command: redis-server --appendonly yes --requirepass redis_password
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - joulaa-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
+  # =============================================================================
+  # OBJECT STORAGE
+  # =============================================================================
+  minio:
+    image: minio/minio:latest
+    container_name: joulaa-minio
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: joulaa_admin
+      MINIO_ROOT_PASSWORD: joulaa_admin_password
+    volumes:
+      - minio_data:/data
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    networks:
+      - joulaa-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+    restart: unless-stopped
+
+  # =============================================================================
+  # BACKEND APPLICATION
+  # =============================================================================
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      target: development
+    container_name: joulaa-backend
+    environment:
+      - ENVIRONMENT=development
+      - DATABASE_URL=postgresql://joulaa_user:joulaa_password@postgres:5432/joulaa
+      - REDIS_URL=redis://:redis_password@redis:6379
+      - MINIO_ENDPOINT=minio:9000
+      - MINIO_ACCESS_KEY=joulaa_admin
+      - MINIO_SECRET_KEY=joulaa_admin_password
+      - MINIO_SECURE=false
+      - CORS_ORIGINS=http://localhost:3000,http://localhost:5173
+      - SECRET_KEY=dev-secret-key-change-in-production-min-32-chars
+      - DEBUG=true
+      - LOG_LEVEL=DEBUG
+      - CELERY_BROKER_URL=redis://:redis_password@redis:6379/1
+      - CELERY_RESULT_BACKEND=redis://:redis_password@redis:6379/2
+    volumes:
+      - ./backend:/app
+      - backend_uploads:/app/uploads
+    ports:
+      - "8000:8000"
+    networks:
+      - joulaa-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+    develop:
+      watch:
+        - action: sync
+          path: ./backend
+          target: /app
+          ignore:
+            - __pycache__/
+            - "*.pyc"
+            - ".pytest_cache/"
+
+  # =============================================================================
+  # FRONTEND APPLICATION
+  # =============================================================================
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: development
+    container_name: joulaa-frontend
+    environment:
+      - NODE_ENV=development
+      - REACT_APP_API_URL=http://localhost:8000/api/v1
+      - REACT_APP_WS_URL=ws://localhost:8000/ws
+      - REACT_APP_ENVIRONMENT=development
+      - CHOKIDAR_USEPOLLING=true
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    networks:
+      - joulaa-network
+    depends_on:
+      - backend
+    restart: unless-stopped
+    develop:
+      watch:
+        - action: sync
+          path: ./frontend/src
+          target: /app/src
+        - action: rebuild
+          path: ./frontend/package.json
+
+  # =============================================================================
+  # BACKGROUND TASK WORKER
+  # =============================================================================
+  celery-worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      target: development
+    container_name: joulaa-celery-worker
+    command: celery -A app.core.celery worker --loglevel=info --concurrency=2
+    environment:
+      - ENVIRONMENT=development
+      - DATABASE_URL=postgresql://joulaa_user:joulaa_password@postgres:5432/joulaa
+      - REDIS_URL=redis://:redis_password@redis:6379
+      - CELERY_BROKER_URL=redis://:redis_password@redis:6379/1
+      - CELERY_RESULT_BACKEND=redis://:redis_password@redis:6379/2
+      - MINIO_ENDPOINT=minio:9000
+      - MINIO_ACCESS_KEY=joulaa_admin
+      - MINIO_SECRET_KEY=joulaa_admin_password
+      - SECRET_KEY=dev-secret-key-change-in-production-min-32-chars
+    volumes:
+      - ./backend:/app
+    networks:
+      - joulaa-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # =============================================================================
+  # TASK SCHEDULER
+  # =============================================================================
+  celery-beat:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      target: development
+    container_name: joulaa-celery-beat
+    command: celery -A app.core.celery beat --loglevel=info
+    environment:
+      - ENVIRONMENT=development
+      - DATABASE_URL=postgresql://joulaa_user:joulaa_password@postgres:5432/joulaa
+      - REDIS_URL=redis://:redis_password@redis:6379
+      - CELERY_BROKER_URL=redis://:redis_password@redis:6379/1
+      - CELERY_RESULT_BACKEND=redis://:redis_password@redis:6379/2
+      - SECRET_KEY=dev-secret-key-change-in-production-min-32-chars
+    volumes:
+      - ./backend:/app
+    networks:
+      - joulaa-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # =============================================================================
+  # DEVELOPMENT TOOLS
+  # =============================================================================
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: joulaa-mailhog
+    ports:
+      - "1025:1025"  # SMTP server
+      - "8025:8025"  # Web UI
+    networks:
+      - joulaa-network
+    restart: unless-stopped
+    profiles:
+      - development
+
+  adminer:
+    image: adminer:latest
+    container_name: joulaa-adminer
+    environment:
+      - ADMINER_DEFAULT_SERVER=postgres
+    ports:
+      - "8080:8080"
+    networks:
+      - joulaa-network
+    depends_on:
+      - postgres
+    restart: unless-stopped
+    profiles:
+      - development
+
+# =============================================================================
+# NETWORKS
+# =============================================================================
+networks:
+  joulaa-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+# =============================================================================
+# VOLUMES
+# =============================================================================
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  minio_data:
+    driver: local
+  backend_uploads:
+    driver: local

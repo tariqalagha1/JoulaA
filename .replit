@@ -1,0 +1,47 @@
+run = "npm run dev"
+entrypoint = "frontend/src/main.tsx"
+
+[nix]
+channel = "stable-23_11"
+
+[env]
+PYTHONPATH = "${REPL_HOME}/backend"
+NODE_ENV = "development"
+REACT_APP_API_URL = "http://localhost:8000"
+REACT_APP_WS_URL = "ws://localhost:8000/ws"
+
+[packager]
+language = "nodejs"
+
+[packager.features]
+packageSearch = true
+guessImports = true
+
+[languages]
+[languages.javascript]
+pattern = "**/*.js"
+syntax = "javascript"
+
+[languages.typescript]
+pattern = "**/*.ts"
+syntax = "typescript"
+
+[languages.typescript]
+pattern = "**/*.tsx"
+syntax = "typescript"
+
+[languages.python]
+pattern = "**/*.py"
+syntax = "python"
+
+[languages.json]
+pattern = "**/*.json"
+syntax = "json"
+
+[languages.yaml]
+pattern = "**/*.yml"
+syntax = "yaml"
+
+[languages.yaml]
+pattern = "**/*.yaml"
+syntax = "yaml" 
