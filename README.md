@@ -1,8 +1,8 @@
-# Joulaa Platform
+# Sabry Platform
 
 <div align="center">
 
-![Joulaa Logo](https://via.placeholder.com/200x80/4F46E5/FFFFFF?text=Joulaa)
+![Sabry Logo](https://via.placeholder.com/200x80/4F46E5/FFFFFF?text=Sabry)
 
 **Enterprise-Grade AI-Powered Business Intelligence Platform**
 
@@ -35,7 +35,7 @@
 
 ## Overview
 
-Joulaa Platform is a comprehensive, enterprise-grade business intelligence and analytics platform that leverages artificial intelligence to provide actionable insights from your data. Built with modern technologies and designed for scalability, security, and performance.
+Sabry Platform is a comprehensive, enterprise-grade business intelligence and analytics platform that leverages artificial intelligence to provide actionable insights from your data. Built with modern technologies and designed for scalability, security, and performance.
 
 ### Key Capabilities
 
