@@ -3,6 +3,7 @@ from .user import User
 from .organization import Organization, UserOrganization
 from .agent import AIAgent, AgentMetrics, AgentTemplate, AgentWorkflow
 from .conversation import Conversation, Message
+from .integration import Integration
 
 __all__ = [
     "User",
@@ -13,5 +14,6 @@ __all__ = [
     "AgentTemplate",
     "AgentWorkflow",
     "Conversation",
-    "Message"
+    "Message",
+    "Integration"
 ]
