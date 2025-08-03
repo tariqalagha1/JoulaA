@@ -39,6 +39,7 @@ class Organization(Base):
     # Relationships
     members = relationship("UserOrganization", back_populates="organization")
     agents = relationship("AIAgent", back_populates="organization")
+    integrations = relationship("Integration", back_populates="organization")
     
     def __repr__(self):
         return f"<Organization(id={self.id}, name_ar={self.name_ar})>"

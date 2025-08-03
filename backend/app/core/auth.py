@@ -183,6 +183,33 @@ async def get_current_active_user(
     return current_user
 
 
+async def get_user_from_token(token: str, db: AsyncSession) -> Optional[User]:
+    """Get user from token string (for WebSocket authentication)"""
+    try:
+        payload = TokenManager.verify_token(token)
+        user_id = payload.get("sub")
+        
+        if user_id is None:
+            return None
+            
+        # Get user from database
+        result = await db.execute(
+            select(User).where(User.id == UUID(user_id))
+        )
+        user = result.scalar_one_or_none()
+        
+        if user is None or not user.is_active:
+            return None
+            
+        return user
+        
+    except (jwt.InvalidTokenError, jwt.ExpiredSignatureError, ValueError):
+        return None
+    except Exception as e:
+        logger.error("Error getting user from token", error=str(e))
+        return None
+
+
 class PermissionChecker:
     """Utility class for checking user permissions"""
     

@@ -1,230 +1,235 @@
-# Sabry Platform
+# 🌟 Joulaa Platform
 
 <div align="center">
 
-![Sabry Logo](https://via.placeholder.com/200x80/4F46E5/FFFFFF?text=Sabry)
+![Joulaa Logo](https://via.placeholder.com/200x80/4F46E5/FFFFFF?text=Joulaa)
 
-**Enterprise-Grade AI-Powered Business Intelligence Platform**
+**Enterprise-Grade Arabic-First AI Platform for Business Intelligence & Automation**
 
-[![Build Status](https://github.com/your-org/joulaa-platform/workflows/CI/CD/badge.svg)](https://github.com/your-org/joulaa-platform/actions)
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=joulaa-platform&metric=security_rating)](https://sonarcloud.io/dashboard?id=joulaa-platform)
-[![Coverage](https://codecov.io/gh/your-org/joulaa-platform/branch/main/graph/badge.svg)](https://codecov.io/gh/your-org/joulaa-platform)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Version](https://img.shields.io/github/v/release/your-org/joulaa-platform)](https://github.com/your-org/joulaa-platform/releases)
+**Created by [MedNextApp.com](https://mednextapp.com)**
 
-[🚀 Quick Start](#quick-start) • [📖 Documentation](#documentation) • [🛠️ Development](#development) • [🔒 Security](#security) • [🤝 Contributing](#contributing)
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/your-org/joulaa-platform)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue)](https://github.com/your-org/joulaa-platform/releases)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![Arabic Support](https://img.shields.io/badge/Arabic-RTL%20Support-orange)](https://github.com/your-org/joulaa-platform)
+[![AI Powered](https://img.shields.io/badge/AI-Powered-purple)](https://github.com/your-org/joulaa-platform)
+
+[🚀 Quick Start](#-quick-start) • [📖 Documentation](#-documentation) • [🛠️ Development](#-development) • [🔒 Security](#-security) • [🤝 Contributing](#-contributing)
 
 </div>
 
-## Table of Contents
+## 📋 Table of Contents
 
-- [Overview](#overview)
-- [Marketing & Business Value](#marketing--business-value)
-- [Features](#features)
-- [Architecture](#architecture)
-- [Quick Start](#quick-start)
-- [Installation](#installation)
-- [Configuration](#configuration)
-- [Development](#development)
-- [Deployment](#deployment)
-- [API Documentation](#api-documentation)
-- [Security](#security)
-- [Monitoring](#monitoring)
-- [Contributing](#contributing)
-- [Support](#support)
-- [License](#license)
+- [Overview](#-overview)
+- [Key Features](#-key-features)
+- [Technology Stack](#-technology-stack)
+- [Architecture](#-architecture)
+- [Quick Start](#-quick-start)
+- [Installation](#-installation)
+- [Configuration](#-configuration)
+- [Development](#-development)
+- [API Documentation](#-api-documentation)
+- [Deployment](#-deployment)
+- [Security](#-security)
+- [Monitoring](#-monitoring)
+- [Contributing](#-contributing)
+- [Support](#-support)
+- [License](#-license)
 
-## Overview
+## 🎯 Overview
 
-Sabry Platform is a comprehensive, enterprise-grade business intelligence and analytics platform that leverages artificial intelligence to provide actionable insights from your data. Built with modern technologies and designed for scalability, security, and performance.
+Joulaa Platform is a comprehensive, enterprise-grade business intelligence and AI automation platform specifically designed for Arabic-speaking enterprises. Built with modern technologies and designed for scalability, security, and performance, it provides native Arabic language support with full RTL (Right-to-Left) interface capabilities.
 
-### Key Capabilities
+### 🌍 Target Market
 
-- **AI-Powered Analytics**: Advanced machine learning algorithms for predictive analytics
-- **Real-time Dashboards**: Interactive visualizations with real-time data updates
-- **Enterprise Integration**: Seamless integration with SAP, Oracle, Microsoft, and other enterprise systems
-- **Multi-language Support**: Arabic and English language processing with NLP capabilities
-- **Scalable Architecture**: Kubernetes-native design for horizontal scaling
-- **Security First**: Enterprise-grade security with compliance support (GDPR, SOC 2)
-
-## Marketing & Business Value
-
-### Target Market
-
-**Primary Market**: Arabic-speaking enterprises in the MENA region seeking AI-powered business automation and intelligence solutions.
+**Primary Focus**: Arabic-speaking enterprises in the MENA region seeking AI-powered business automation and intelligence solutions.
 
 - **Enterprise Size**: Mid to large enterprises (500+ employees)
 - **Industries**: Finance, Manufacturing, Retail, Healthcare, Government, Oil & Gas
 - **Geographic Focus**: Saudi Arabia, UAE, Egypt, Jordan, Qatar, Kuwait, Bahrain
-- **Annual Revenue**: $50M+ organizations with digital transformation budgets
+- **Languages**: Native Arabic with English support
 
-### Market Opportunity
+### 🎯 Key Capabilities
 
-- **Total Addressable Market (TAM)**: $2.8B MENA AI market by 2025
-- **Serviceable Addressable Market (SAM)**: $850M enterprise AI segment
-- **Serviceable Obtainable Market (SOM)**: $85M Arabic-first AI solutions
+- **🤖 AI-Powered Analytics**: Advanced machine learning algorithms for predictive analytics
+- **📊 Real-time Dashboards**: Interactive visualizations with real-time data updates
+- **🔗 Enterprise Integration**: Seamless integration with SAP, Oracle, Microsoft, and other enterprise systems
+- **🌐 Multi-language Support**: Arabic and English language processing with advanced NLP capabilities
+- **☁️ Scalable Architecture**: Kubernetes-native design for horizontal scaling
+- **🛡️ Security First**: Enterprise-grade security with compliance support (GDPR, SOC 2)
+- **📱 RTL Support**: Complete Right-to-Left interface for Arabic users
+- **🎨 Agent Studio**: Visual drag-and-drop interface for building AI agents
 
-### Competitive Advantages
-
-🌟 **Native Arabic AI**: First enterprise platform built specifically for Arabic language processing
-
-🚀 **Cultural Intelligence**: Deep understanding of MENA business practices and compliance requirements
-
-⚡ **Rapid Deployment**: 90% faster implementation compared to traditional BI solutions
-
-🔒 **Enterprise Security**: SOC 2, ISO 27001 compliant with local data residency options
-
-💰 **Cost Efficiency**: 60% reduction in operational costs through AI automation
-
-### Key Performance Indicators
-
-| Metric | Value | Industry Benchmark |
-|--------|-------|-------------------|
-| Implementation Time | 2-4 weeks | 6-12 months |
-| ROI Achievement | 3-6 months | 12-18 months |
-| User Adoption Rate | 85% | 45% |
-| Customer Satisfaction | 4.8/5 | 3.2/5 |
-| Data Processing Speed | 10x faster | Baseline |
-| Multi-language Accuracy | 96% Arabic | 78% industry avg |
-
-### Business Impact
-
-#### For Finance Teams
-- **Automated Financial Reporting**: Reduce month-end closing from 10 days to 2 days
-- **Risk Management**: Real-time fraud detection with 99.2% accuracy
-- **Compliance**: Automated regulatory reporting for SAMA, ADGM, CMA
-
-#### For Operations
-- **Supply Chain Optimization**: 25% reduction in inventory costs
-- **Predictive Maintenance**: 40% decrease in equipment downtime
-- **Quality Control**: AI-powered defect detection with 98% accuracy
-
-#### For HR & Management
-- **Talent Analytics**: Improve employee retention by 30%
-- **Performance Insights**: Data-driven decision making across all departments
-- **Strategic Planning**: AI-powered market analysis and forecasting
-
-### Customer Success Stories
-
-> "Sabry Platform transformed our financial operations. We now generate reports in Arabic and English simultaneously, saving 200+ hours monthly." 
-> 
-> — **CFO, Major Saudi Bank**
-
-> "The AI agents understand our business context perfectly. Implementation was seamless, and ROI was achieved in just 4 months."
-> 
-> — **CTO, UAE Manufacturing Group**
-
-### Pricing Strategy
-
-- **Starter**: $2,500/month (up to 50 users)
-- **Professional**: $7,500/month (up to 200 users)
-- **Enterprise**: Custom pricing (unlimited users, dedicated support)
-- **Government**: Special pricing with local deployment options
-
-### Go-to-Market Strategy
-
-1. **Direct Sales**: Enterprise sales team targeting Fortune 500 MENA companies
-2. **Partner Channel**: Strategic partnerships with SAP, Oracle, Microsoft in the region
-3. **Government Relations**: Direct engagement with digital transformation initiatives
-4. **Industry Events**: Participation in GITEX, Saudi Tech, Egypt ICT
-
-## Features
+## ✨ Key Features
 
 ### 🤖 AI & Machine Learning
-- **Predictive Analytics**: Forecast trends and identify patterns
-- **Natural Language Processing**: Arabic and English text analysis
-- **Automated Insights**: AI-generated recommendations and alerts
-- **Custom Models**: Train and deploy custom ML models
-- **Data Mining**: Advanced data discovery and pattern recognition
+- **Predictive Analytics**: Forecast trends and identify patterns using advanced ML models
+- **Natural Language Processing**: Advanced Arabic and English text analysis
+- **AI Agent Builder**: Visual drag-and-drop interface for creating custom AI agents
+- **OpenAI Integration**: GPT models for text generation and analysis
+- **Anthropic Claude**: Advanced reasoning and analysis capabilities
+- **Custom Models**: Train and deploy custom ML models for specific use cases
+- **Arabic NLP**: Specialized Arabic language processing with reshaping and bidirectional text support
 
 ### 📊 Business Intelligence
-- **Interactive Dashboards**: Drag-and-drop dashboard builder
-- **Real-time Reporting**: Live data visualization and reporting
+- **Interactive Dashboards**: Drag-and-drop dashboard builder with real-time updates
+- **Real-time Reporting**: Live data visualization and automated reporting
 - **Data Visualization**: Charts, graphs, maps, and custom visualizations
-- **KPI Monitoring**: Key performance indicator tracking
+- **KPI Monitoring**: Key performance indicator tracking and alerting
 - **Scheduled Reports**: Automated report generation and distribution
+- **Multi-language Reports**: Generate reports in both Arabic and English
 
 ### 🔗 Enterprise Integration
-- **SAP Integration**: Native SAP ERP and S/4HANA connectivity
-- **Oracle Integration**: Oracle Database and applications support
-- **Microsoft Integration**: Office 365, Power BI, and Azure services
 - **REST APIs**: Comprehensive API for custom integrations
+- **WebSocket Support**: Real-time bidirectional communication
+- **Database Connectivity**: PostgreSQL with Redis caching
+- **File Storage**: MinIO object storage for scalable file management
 - **Webhook Support**: Real-time event notifications
+- **Enterprise SSO**: Single sign-on integration capabilities
 
 ### 🛡️ Security & Compliance
-- **Multi-Factor Authentication**: Enhanced security with 2FA/MFA
+- **JWT Authentication**: Secure token-based authentication with refresh tokens
 - **Role-Based Access Control**: Granular permission management
 - **Data Encryption**: End-to-end encryption at rest and in transit
-- **Audit Logging**: Comprehensive activity tracking
-- **Compliance**: GDPR, SOC 2, and industry standard compliance
+- **Audit Logging**: Comprehensive activity tracking and compliance reporting
+- **Rate Limiting**: API rate limiting and DDoS protection
+- **Arabic Password Validation**: Specialized validation for Arabic users
 
-### 🌐 Multi-language Support
-- **Arabic Language**: Full RTL support with Arabic NLP
+### 🌐 Internationalization
+- **Arabic Language**: Full RTL support with Arabic NLP capabilities
 - **English Language**: Comprehensive English language processing
-- **Internationalization**: Multi-locale and timezone support
-- **Content Localization**: Localized UI and content
+- **RTL Interface**: Complete right-to-left user interface
+- **Bidirectional Text**: Proper handling of mixed Arabic-English content
+- **Locale Support**: Multi-timezone and cultural formatting
 
-## Architecture
+## 🛠️ Technology Stack
+
+### Frontend Technologies
+- **Framework**: React 18 with TypeScript
+- **Build Tool**: Vite with SWC for fast development
+- **Styling**: Tailwind CSS with RTL support
+- **State Management**: Zustand for lightweight state management
+- **Data Fetching**: TanStack Query (React Query) for server state
+- **Forms**: React Hook Form with Zod validation
+- **Routing**: React Router DOM v6
+- **Internationalization**: React i18next with Arabic support
+- **UI Components**: Custom components with Lucide React icons
+- **Animations**: Framer Motion for smooth animations
+- **Drag & Drop**: React DnD for agent studio
+- **Charts**: Recharts for data visualization
+- **Real-time**: Socket.IO client for WebSocket connections
+
+### Backend Technologies
+- **Framework**: FastAPI with Python 3.11+
+- **Database**: PostgreSQL 15+ with SQLAlchemy 2.0 ORM
+- **Cache**: Redis 7+ for caching and session management
+- **Authentication**: JWT with refresh tokens and bcrypt hashing
+- **API Documentation**: Automatic OpenAPI/Swagger generation
+- **Validation**: Pydantic v2 for data validation and serialization
+- **Async Support**: Full async/await support with ASGI
+- **WebSockets**: Native WebSocket support for real-time features
+- **File Upload**: Multipart form data handling
+- **Security**: CORS, rate limiting, and input sanitization
+
+### AI & Machine Learning
+- **OpenAI**: GPT models for text generation and analysis
+- **Anthropic**: Claude models for advanced reasoning
+- **Arabic NLP**: Custom Arabic language processing pipeline
+- **Text Processing**: Arabic reshaper and bidirectional text support
+- **Vector Operations**: Embeddings and similarity search capabilities
+- **ML Pipeline**: Automated model training and deployment
+
+### Infrastructure & DevOps
+- **Containerization**: Docker with multi-stage builds
+- **Orchestration**: Kubernetes with Helm charts
+- **Object Storage**: MinIO for scalable file storage
+- **Monitoring**: Prometheus and Grafana integration ready
+- **CI/CD**: GitHub Actions workflows
+- **Database Migrations**: Alembic for database schema management
+- **Environment Management**: Multiple environment configurations
+
+### Development Tools
+- **Code Quality**: ESLint, Prettier, Black, Flake8
+- **Testing**: Vitest (frontend), Pytest (backend)
+- **Type Checking**: TypeScript and mypy
+- **Pre-commit Hooks**: Husky and lint-staged
+- **Package Management**: npm workspaces for monorepo structure
+
+## 🏗️ Architecture
 
 ### System Overview
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Frontend      │    │   API Gateway   │    │   Backend       │
+│   Frontend      │    │   Load Balancer │    │   Backend       │
 │                 │    │                 │    │                 │
-│ • React/TS      │───▶│ • Rate Limiting │───▶│ • FastAPI       │
-│ • Redux Toolkit │    │ • Authentication│    │ • SQLAlchemy    │
-│ • Material-UI   │    │ • Load Balancer │    │ • Celery        │
+│ • React/TS      │───▶│ • Nginx/Traefik │───▶│ • FastAPI       │
+│ • Tailwind CSS  │    │ • SSL/TLS       │    │ • SQLAlchemy    │
+│ • RTL Support   │    │ • Rate Limiting │    │ • WebSockets    │
+│ • Agent Studio  │    │ • CORS          │    │ • AI Integration│
 └─────────────────┘    └─────────────────┘    └─────────────────┘
          │                       │                       │
          ▼                       ▼                       ▼
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   CDN/Storage   │    │   Monitoring    │    │   Database      │
+│   Object Storage│    │   Monitoring    │    │   Database      │
 │                 │    │                 │    │                 │
-│ • MinIO/S3      │    │ • Prometheus    │    │ • PostgreSQL    │
-│ • File Storage  │    │ • Grafana       │    │ • Redis         │
-│ • Asset Delivery│    │ • Alerting      │    │ • Vector DB     │
+│ • MinIO         │    │ • Prometheus    │    │ • PostgreSQL    │
+│ • File Storage  │    │ • Grafana       │    │ • Redis Cache   │
+│ • Asset Delivery│    │ • Health Checks │    │ • Vector Store  │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+         │                       │                       │
+         ▼                       ▼                       ▼
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   AI Services   │    │   External APIs │    │   Security      │
+│                 │    │                 │    │                 │
+│ • OpenAI GPT    │    │ • Enterprise    │    │ • JWT Auth      │
+│ • Anthropic     │    │ • SAP/Oracle    │    │ • RBAC          │
+│ • Arabic NLP    │    │ • Third-party   │    │ • Audit Logs    │
 └─────────────────┘    └─────────────────┘    └─────────────────┘
 ```
 
-### Technology Stack
+### Project Structure
 
-#### Frontend
-- **Framework**: React 18 with TypeScript
-- **State Management**: Redux Toolkit with RTK Query
-- **UI Library**: Material-UI (MUI) v5
-- **Build Tool**: Vite with SWC
-- **Testing**: React Testing Library, Jest, Playwright
+```
+joulaa-platform/
+├── 📁 frontend/                 # React TypeScript frontend
+│   ├── 📁 src/
+│   │   ├── 📁 components/       # Reusable UI components
+│   │   ├── 📁 pages/           # Page components
+│   │   ├── 📁 hooks/           # Custom React hooks
+│   │   ├── 📁 services/        # API services
+│   │   ├── 📁 stores/          # Zustand stores
+│   │   ├── 📁 utils/           # Utility functions
+│   │   └── 📁 i18n/            # Internationalization
+│   ├── 📄 package.json         # Frontend dependencies
+│   ├── 📄 vite.config.ts       # Vite configuration
+│   └── 📄 tailwind.config.js   # Tailwind CSS config
+├── 📁 backend/                  # FastAPI Python backend
+│   ├── 📁 app/                 # Application code
+│   ├── 📁 core/                # Core functionality
+│   ├── 📁 models/              # Database models
+│   ├── 📁 schemas/             # Pydantic schemas
+│   ├── 📁 services/            # Business logic
+│   ├── 📁 utils/               # Utility functions
+│   ├── 📁 tests/               # Test suites
+│   ├── 📄 requirements.txt     # Python dependencies
+│   └── 📄 Dockerfile           # Backend container
+├── 📁 k8s/                     # Kubernetes manifests
+├── 📁 scripts/                 # Deployment scripts
+├── 📁 shared/                  # Shared types and utilities
+├── 📄 docker-compose.yml       # Development environment
+├── 📄 package.json             # Root package configuration
+└── 📄 README.md                # This file
+```
 
-#### Backend
-- **Framework**: FastAPI with Python 3.11+
-- **Database**: PostgreSQL 15+ with SQLAlchemy 2.0
-- **Cache**: Redis 7+ for caching and sessions
-- **Task Queue**: Celery with Redis broker
-- **Authentication**: JWT with refresh tokens
-
-#### Infrastructure
-- **Container**: Docker with multi-stage builds
-- **Orchestration**: Kubernetes with Helm charts
-- **Storage**: MinIO for object storage
-- **Monitoring**: Prometheus + Grafana stack
-- **CI/CD**: GitHub Actions with automated testing
-
-#### AI/ML Stack
-- **OpenAI**: GPT models for text generation
-- **Anthropic**: Claude models for analysis
-- **Arabic NLP**: Custom Arabic language processing
-- **Vector Database**: Embeddings and similarity search
-- **ML Pipeline**: Automated model training and deployment
-
-## Quick Start
+## 🚀 Quick Start
 
 ### Prerequisites
 
 - **Docker**: 20.10+ with Docker Compose
-- **Node.js**: 18+ with npm/yarn
-- **Python**: 3.11+ with pip
+- **Node.js**: 18+ with npm
 - **Git**: Latest version
+- **Optional**: Python 3.11+ for local backend development
 
 ### 1. Clone the Repository
 
@@ -239,17 +244,17 @@ cd joulaa-platform
 # Copy environment template
 cp .env.example .env.development
 
-# Edit configuration (see Configuration section)
+# Edit configuration (add your API keys)
 vim .env.development
 ```
 
 ### 3. Start Development Environment
 
 ```bash
-# Start all services
+# Start all services with Docker Compose
 docker-compose up -d
 
-# Wait for services to be ready
+# Wait for services to be ready (check logs)
 docker-compose logs -f
 ```
 
@@ -259,8 +264,8 @@ docker-compose logs -f
 # Run database migrations
 docker-compose exec backend alembic upgrade head
 
-# Initialize sample data
-docker-compose exec backend python scripts/init_db.py
+# Create test users (optional)
+docker-compose exec backend python create_test_users.py
 ```
 
 ### 5. Access the Application
@@ -268,17 +273,33 @@ docker-compose exec backend python scripts/init_db.py
 - **Frontend**: http://localhost:3000
 - **Backend API**: http://localhost:8000
 - **API Documentation**: http://localhost:8000/docs
-- **Grafana**: http://localhost:3001 (admin/admin)
-- **MinIO Console**: http://localhost:9001 (admin/password)
+- **MinIO Console**: http://localhost:9001 (admin/joulaa_admin_password)
+- **PostgreSQL**: localhost:5432 (joulaa_user/joulaa_password)
+- **Redis**: localhost:6379
 
-## Installation
+## 📦 Installation
 
 ### Development Installation
 
-#### Backend Setup
+#### Option 1: Docker Development (Recommended)
 
 ```bash
-# Navigate to backend directory
+# Clone and setup
+git clone https://github.com/your-org/joulaa-platform.git
+cd joulaa-platform
+
+# Start development environment
+docker-compose up -d
+
+# Install frontend dependencies for IDE support
+cd frontend && npm install
+```
+
+#### Option 2: Local Development
+
+**Backend Setup:**
+
+```bash
 cd backend
 
 # Create virtual environment
@@ -287,10 +308,9 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 # Install dependencies
 pip install -r requirements.txt
-pip install -r requirements-dev.txt
 
-# Set up pre-commit hooks
-pre-commit install
+# Set up environment variables
+cp ../.env.example .env
 
 # Run database migrations
 alembic upgrade head
@@ -299,21 +319,16 @@ alembic upgrade head
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-#### Frontend Setup
+**Frontend Setup:**
 
 ```bash
-# Navigate to frontend directory
 cd frontend
 
 # Install dependencies
 npm install
-# or
-yarn install
 
 # Start development server
 npm run dev
-# or
-yarn dev
 ```
 
 ### Production Installation
@@ -325,11 +340,11 @@ yarn dev
 git clone https://github.com/your-org/joulaa-platform.git
 cd joulaa-platform
 
-# Configure environment
+# Configure production environment
 cp .env.example .env.production
 vim .env.production
 
-# Start production stack
+# Build and start production stack
 docker-compose -f docker-compose.prod.yml up -d
 ```
 
@@ -347,17 +362,11 @@ kubectl rollout status deployment/frontend
 kubectl get ingress
 ```
 
-## Configuration
+## ⚙️ Configuration
 
 ### Environment Variables
 
-The platform uses environment variables for configuration. Copy `.env.example` to create your environment file:
-
-```bash
-cp .env.example .env.development
-```
-
-#### Core Configuration
+The platform uses environment variables for configuration. Key variables include:
 
 ```bash
 # Application
@@ -368,8 +377,8 @@ DEBUG=true
 SECRET_KEY="your-secret-key-here"
 
 # Database
-DATABASE_URL="postgresql://user:password@localhost:5432/joulaa"
-REDIS_URL="redis://localhost:6379/0"
+DATABASE_URL="postgresql://joulaa_user:joulaa_password@localhost:5432/joulaa"
+REDIS_URL="redis://:redis_password@localhost:6379/0"
 
 # AI Services
 OPENAI_API_KEY="your-openai-api-key"
@@ -377,31 +386,19 @@ ANTHROPIC_API_KEY="your-anthropic-api-key"
 
 # Storage
 MINIO_ENDPOINT="localhost:9000"
-MINIO_ACCESS_KEY="admin"
-MINIO_SECRET_KEY="password"
-```
+MINIO_ACCESS_KEY="joulaa_admin"
+MINIO_SECRET_KEY="joulaa_admin_password"
 
-#### Security Configuration
-
-```bash
-# JWT Settings
+# Security
 JWT_SECRET_KEY="your-jwt-secret"
 JWT_ACCESS_TOKEN_EXPIRE_MINUTES=30
 JWT_REFRESH_TOKEN_EXPIRE_DAYS=7
 
-# Password Policy
-PASSWORD_MIN_LENGTH=8
-PASSWORD_REQUIRE_UPPERCASE=true
-PASSWORD_REQUIRE_LOWERCASE=true
-PASSWORD_REQUIRE_NUMBERS=true
-PASSWORD_REQUIRE_SPECIAL=true
-
-# Rate Limiting
-RATE_LIMIT_ENABLED=true
-RATE_LIMIT_REQUESTS_PER_MINUTE=60
+# CORS
+CORS_ORIGINS="http://localhost:3000,http://localhost:5173"
 ```
 
-#### Feature Flags
+### Feature Flags
 
 ```bash
 # AI Features
@@ -409,18 +406,13 @@ FEATURE_AI_CHAT=true
 FEATURE_PREDICTIVE_ANALYTICS=true
 FEATURE_ARABIC_NLP=true
 
-# Enterprise Features
-FEATURE_SAP_INTEGRATION=false
-FEATURE_ORACLE_INTEGRATION=false
-FEATURE_ADVANCED_ANALYTICS=true
-
 # UI Features
 FEATURE_DARK_MODE=true
 FEATURE_RTL_SUPPORT=true
-FEATURE_MOBILE_APP=false
+FEATURE_AGENT_STUDIO=true
 ```
 
-## Development
+## 🛠️ Development
 
 ### Development Workflow
 
@@ -430,35 +422,45 @@ FEATURE_MOBILE_APP=false
    ```
 
 2. **Make Changes**
-   - Follow coding standards (see [CONTRIBUTING.md](CONTRIBUTING.md))
+   - Follow coding standards and conventions
    - Write tests for new functionality
    - Update documentation as needed
+   - Ensure RTL support for Arabic text
 
 3. **Run Tests**
    ```bash
-   # Backend tests
-   cd backend
-   pytest
-   
    # Frontend tests
-   cd frontend
-   npm test
+   cd frontend && npm test
+   
+   # Backend tests
+   cd backend && pytest
    ```
 
 4. **Code Quality Checks**
    ```bash
-   # Backend
-   black .
-   isort .
-   flake8
-   mypy .
-   
    # Frontend
    npm run lint
    npm run type-check
+   
+   # Backend
+   black .
+   flake8
    ```
 
 ### Testing
+
+#### Frontend Testing
+
+```bash
+# Run unit tests
+npm test
+
+# Run with UI
+npm run test:ui
+
+# Run with coverage
+npm run test:coverage
+```
 
 #### Backend Testing
 
@@ -470,52 +472,19 @@ pytest
 pytest --cov=app --cov-report=html
 
 # Run specific test file
-pytest tests/test_users.py
+pytest tests/test_auth.py
 ```
 
-#### Frontend Testing
+### Code Quality
 
-```bash
-# Run unit tests
-npm test
+The project uses several tools to maintain code quality:
 
-# Run with coverage
-npm run test:coverage
+- **Frontend**: ESLint, Prettier, TypeScript
+- **Backend**: Black, Flake8, mypy
+- **Pre-commit Hooks**: Husky and lint-staged
+- **Conventional Commits**: Standardized commit messages
 
-# Run E2E tests
-npm run test:e2e
-```
-
-## Deployment
-
-### Docker Deployment
-
-#### Production Deployment
-
-```bash
-# Deploy to production
-docker-compose -f docker-compose.prod.yml up -d
-
-# Scale services
-docker-compose -f docker-compose.prod.yml up -d --scale backend=3
-```
-
-### Kubernetes Deployment
-
-#### Deploy with Kubectl
-
-```bash
-# Create namespace
-kubectl create namespace joulaa
-
-# Apply secrets
-kubectl apply -f k8s/secrets/
-
-# Deploy services
-kubectl apply -f k8s/
-```
-
-## API Documentation
+## 📚 API Documentation
 
 ### Interactive Documentation
 
@@ -532,47 +501,95 @@ The API uses JWT tokens for authentication:
 curl -X POST "http://localhost:8000/api/v1/auth/login" \
   -H "Content-Type: application/json" \
   -d '{"email": "user@example.com", "password": "password"}'
+
+# Use token in requests
+curl -H "Authorization: Bearer YOUR_TOKEN" \
+  "http://localhost:8000/api/v1/users/me"
 ```
 
-## Security
+### WebSocket Endpoints
 
-### Security Features
+- **Chat**: `/ws/chat/{chat_id}` - Real-time chat functionality
+- **Notifications**: `/ws/notifications` - Real-time notifications
+- **Agent Studio**: `/ws/agent-studio` - Real-time agent building
 
-- **Authentication**: JWT with refresh tokens
-- **Authorization**: Role-based access control (RBAC)
-- **Encryption**: TLS 1.3 for data in transit
-- **Data Protection**: AES-256 encryption at rest
-- **Input Validation**: Comprehensive input sanitization
-- **Rate Limiting**: API rate limiting and DDoS protection
-- **Security Headers**: CORS, CSP, HSTS, and more
-- **Audit Logging**: Comprehensive activity tracking
+## 🚀 Deployment
 
-### Vulnerability Reporting
+### Docker Deployment
 
-Please report security vulnerabilities to security@your-domain.com. See [SECURITY.md](SECURITY.md) for details.
+```bash
+# Production deployment
+docker-compose -f docker-compose.prod.yml up -d
 
-## Monitoring
+# Scale services
+docker-compose -f docker-compose.prod.yml up -d --scale backend=3
+```
 
-### Metrics and Monitoring
+### Kubernetes Deployment
 
-The platform includes comprehensive monitoring with Prometheus and Grafana:
+```bash
+# Create namespace
+kubectl create namespace joulaa
 
-#### Application Metrics
-- **Request Rate**: HTTP requests per second
-- **Response Time**: API response latencies
-- **Error Rate**: HTTP error percentages
-- **Database**: Connection pool and query metrics
-- **Cache**: Redis hit/miss ratios
+# Apply secrets
+kubectl apply -f k8s/secrets/
 
-#### Health Checks
+# Deploy services
+kubectl apply -f k8s/
+
+# Check deployment status
+kubectl get pods -n joulaa
+```
+
+### Health Checks
 
 - `GET /health` - Basic health check
 - `GET /health/ready` - Readiness probe
 - `GET /health/live` - Liveness probe
 
-## Contributing
+## 🔒 Security
 
-We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+### Security Features
+
+- **Authentication**: JWT with refresh tokens
+- **Authorization**: Role-based access control (RBAC)
+- **Encryption**: TLS 1.3 for data in transit, AES-256 at rest
+- **Input Validation**: Comprehensive input sanitization
+- **Rate Limiting**: API rate limiting and DDoS protection
+- **Security Headers**: CORS, CSP, HSTS, and more
+- **Audit Logging**: Comprehensive activity tracking
+- **Arabic Security**: Specialized validation for Arabic text input
+
+### Security Best Practices
+
+- Regular security updates and dependency scanning
+- Secure secret management
+- Network segmentation
+- Regular security audits
+- Compliance with GDPR and regional regulations
+
+## 📊 Monitoring
+
+### Application Metrics
+
+- **Request Rate**: HTTP requests per second
+- **Response Time**: API response latencies
+- **Error Rate**: HTTP error percentages
+- **Database**: Connection pool and query metrics
+- **Cache**: Redis hit/miss ratios
+- **AI Usage**: OpenAI and Anthropic API usage
+
+### Monitoring Stack
+
+- **Metrics**: Prometheus for metrics collection
+- **Visualization**: Grafana for dashboards
+- **Alerting**: Prometheus Alertmanager
+- **Logging**: Structured logging with JSON format
+- **Tracing**: Distributed tracing ready
+
+## 🤝 Contributing
+
+We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ### Quick Contribution Guide
 
@@ -584,14 +601,23 @@ We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guid
 6. **Push to branch**: `git push origin feature/amazing-feature`
 7. **Create Pull Request**: Submit PR with detailed description
 
-## Support
+### Development Guidelines
+
+- Follow existing code style and conventions
+- Write tests for new features
+- Update documentation as needed
+- Ensure RTL support for Arabic text
+- Test with both Arabic and English interfaces
+- Consider accessibility and performance
+
+## 📞 Support
 
 ### Getting Help
 
 - **Documentation**: [docs.joulaa.com](https://docs.joulaa.com)
 - **GitHub Issues**: [Report bugs or request features](https://github.com/your-org/joulaa-platform/issues)
-- **Email**: support@your-domain.com
-- **Slack**: [Join our Slack workspace](https://slack.joulaa.com)
+- **Email**: support@joulaa.com
+- **Community**: [Join our Discord](https://discord.gg/joulaa)
 
 ### Enterprise Support
 
@@ -602,84 +628,20 @@ For enterprise customers:
 - **Training**: Custom training programs
 - **Custom Development**: Feature development and customization
 
-Contact: enterprise@your-domain.com
+Contact: enterprise@joulaa.com
 
-## License
+## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
 <div align="center">
- 
- **Made with ❤️ by the Joulaa Team**
- 
- [Website](https://joulaa.com) • [Documentation](https://docs.joulaa.com) • [Support](mailto:support@your-domain.com)
- 
- </div>
 
-2. **Access services**
-   - Frontend: http://localhost:3000
-   - Backend: http://localhost:8000
-   - PostgreSQL: localhost:5432
-   - Redis: localhost:6379
-   - MinIO: http://localhost:9000
+**Made with ❤️ by the Joulaa Team**
 
-### Production Deployment
+**Created by [MedNextApp.com](https://mednextapp.com)**
 
-1. **Build production images**
-   ```bash
-   docker-compose -f docker-compose.prod.yml build
-   ```
-
-2. **Deploy to production**
-   ```bash
-   docker-compose -f docker-compose.prod.yml up -d
-   ```
-
-## 📚 API Documentation
-
-The API documentation is automatically generated and available at:
-- Swagger UI: http://localhost:8000/docs
-- ReDoc: http://localhost:8000/redoc
-- OpenAPI JSON: http://localhost:8000/openapi.json
-
-## 🌐 Internationalization
-
-The application supports both Arabic and English languages:
-
-- **Arabic (RTL)**: Default language with full RTL support
-- **English (LTR)**: Secondary language for international users
-
-Translation files are located in `frontend/src/i18n/locales/`.
-
-## 🔒 Security Features
-
-- **JWT Authentication**: Secure token-based authentication
-- **Arabic Password Validation**: Specialized validation for Arabic users
-- **Rate Limiting**: API rate limiting to prevent abuse
-- **CORS Protection**: Cross-origin resource sharing protection
-- **Input Sanitization**: Arabic text sanitization and validation
-- **Audit Logging**: Comprehensive audit trail for all actions
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-### Development Guidelines
-
-- Follow the existing code style and conventions
-- Write tests for new features
-- Update documentation as needed
-- Ensure RTL support for Arabic text
-- Test with both Arabic and English interfaces
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+[Website](https://joulaa.com) • [Documentation](https://docs.joulaa.com) • [Support](mailto:support@joulaa.com) • [Enterprise](mailto:enterprise@joulaa.com)
 
 </div>
